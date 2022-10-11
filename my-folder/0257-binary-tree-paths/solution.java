@@ -16,8 +16,9 @@
 class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> answer = new ArrayList<String>();
-        if (root != null) searchBT(root, "", answer);
-            return answer;
+        if (root != null) 
+            searchBT(root, "", answer);
+        return answer;
     }
 
     private void searchBT(TreeNode root, String path, List<String> answer) {
