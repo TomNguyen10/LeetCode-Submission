@@ -1,26 +1,24 @@
-class Solution {
-    HashSet<List<Integer>> set = new HashSet<>();
+class Solution {   
+
+    List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<Integer> tempList = new ArrayList<>();
-        backtrack(tempList,candidates,target,0);
-        List<List<Integer>> read = new ArrayList<>();
-        for(List<Integer> ls:set){
-            read.add(ls);
-        }
-        return read;
+       List<Integer> temp = new ArrayList<>();
+       backtrack(candidates, target, temp, 0);
+       return res;
     }
-    
-    public void backtrack(List<Integer> tempList,int[] candidates,int target,int start){
-        if(target==0){
-            set.add(new ArrayList<>(tempList));
+
+    public void backtrack(int[] candidates, int target, List<Integer> temp, int index) {
+        if (target == 0) {
+            res.add(new ArrayList<>(temp));
             return;
         }
-        for(int i=start;i<candidates.length;i++){
-            if(candidates[i]>target) 
-                continue;
-            tempList.add(candidates[i]);
-            backtrack(tempList,candidates,target-candidates[i],i);
-            tempList.remove(tempList.size()-1);
+        if (target < 0 || index >= candidates.length) {
+            return;
         }
-    }
+        temp.add(candidates[index]);
+        backtrack(candidates, target - candidates[index], temp, index);
+        temp.remove(temp.get(temp.size() - 1));
+        backtrack(candidates, target, temp, index + 1);
+    } 
 }
