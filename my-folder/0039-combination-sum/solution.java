@@ -13,7 +13,7 @@ class Solution {
             res.add(new ArrayList<>(temp));
             return;
         }
-        if (target < 0 || index >= candidates.length) {
+        if (target < 0 || index == candidates.length) {
             return;
         }
         temp.add(candidates[index]);
