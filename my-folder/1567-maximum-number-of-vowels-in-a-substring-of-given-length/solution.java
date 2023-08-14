@@ -2,7 +2,7 @@ class Solution {
     public int maxVowels(String s, int k) {
         int maxVowels = 0;
         int currentVowels = 0;
-        HashSet<Character> vowels = new HashSet<>();
+        Set<Character> vowels = new HashSet<>();
         vowels.add('a');
         vowels.add('e');
         vowels.add('i');
