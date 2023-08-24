@@ -20,12 +20,14 @@ class Solution {
 
     private int dfs (TreeNode root, int max) {
         if (root == null) return 0;
-
         int res = 0;
-        if (root.val >= max) res = 1;
+        if (root.val >= max ) {
+            res = 1;
+            max = root.val;
+        }
 
-        res += dfs(root.left, Math.max(root.val, max)); 
-        res += dfs(root.right, Math.max(root.val, max)); 
+        res += dfs(root.left, max);
+        res += dfs(root.right, max);
 
         return res;
     }
