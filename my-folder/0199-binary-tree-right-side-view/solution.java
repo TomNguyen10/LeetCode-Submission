@@ -16,21 +16,21 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         if (root == null) return new ArrayList<>();
-        List<Integer> res = new ArrayList<>();
-        bfs(res, root);
-        return res;
+        List<Integer> list = new ArrayList<>();
+        bfs(root, list);
+        return list;
     }
 
-    private void bfs(List<Integer> list, TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        while (!q.isEmpty()) {
-            int size = q.size();
+    private void bfs(TreeNode root, List<Integer> list) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
             for (int i = 0; i < size; i++) {
-                TreeNode cur = q.poll();
+                TreeNode cur = queue.poll();
                 if (i == 0) list.add(cur.val);
-                if (cur.right != null) q.add(cur.right);
-                if (cur.left != null) q.add(cur.left);
+                if (cur.right != null) queue.offer(cur.right);
+                if (cur.left != null) queue.offer(cur.left);
             }
         }
     }
