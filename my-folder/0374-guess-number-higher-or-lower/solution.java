@@ -9,19 +9,19 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        int r = n; 
-        int l = 1;
+        int left = 1;
+        int right = n;
         while (true) {
-            int m = (r - l) / 2 + l;
-            int res = guess(m);
-            if (res == 0) { 
-                return m;
-            } 
-            else if (res == 1) {
-                l = m + 1;
-            } 
+            int middle = (right - left)/2 + left;
+            int num = guess(middle);
+            if (num == 0) {
+                return middle;
+            }
+            else if (num == 1) {
+                left = middle + 1;
+            }
             else {
-                r = m - 1;
+                right = middle - 1;
             }
         }
     }
