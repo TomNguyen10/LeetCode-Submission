@@ -5,5 +5,5 @@ class Solution:
             if i > reach:
                 return False
             reach = max(reach, i + nums[i])
-        return True
         
+        return True
