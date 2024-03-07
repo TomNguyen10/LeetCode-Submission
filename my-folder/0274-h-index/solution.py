@@ -1,16 +1,19 @@
 class Solution:
     def hIndex(self, citations: List[int]) -> int:
         n = len(citations)
-        bucket = [0] * (n+1)
-        for num in citations:
-            if num >= n:
-                bucket[n] += 1
+        counts = [0] * (n+1)
+
+        for i in citations:
+            if i > n:
+                counts[n] += 1
             else:
-                bucket[num] += 1
-        count = 0
-        for i in reversed(range(len(bucket))):
-            count += bucket[i]
-            if count >= i:
-                return i
-        return -1
+                counts[i] += 1
         
+        papers = 0
+
+        for i in range(n, -1, -1):
+            papers += counts[i]
+            if papers >= i:
+                return i
+        
+        return 0
