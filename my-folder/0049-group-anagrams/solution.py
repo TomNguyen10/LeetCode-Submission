@@ -1,15 +1,16 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagrams = {}
-    
+        
+        dic = {}
+
         for word in strs:
             sorted_word = ''.join(sorted(word))
-        
-            if sorted_word in anagrams:
-                anagrams[sorted_word].append(word)
+
+            if sorted_word in dic:
+                dic[sorted_word].append(word)
             else:
-                anagrams[sorted_word] = [word]
-    
-        result = list(anagrams.values())
-    
-        return result
+                dic[sorted_word] = [word]
+        
+        res = list(dic.values())
+
+        return res
