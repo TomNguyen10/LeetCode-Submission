@@ -20,5 +20,5 @@ class Solution:
         
         if not inserted:
             res.append(newInterval)
-
+        
         return res
