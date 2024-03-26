@@ -4,8 +4,7 @@ class Solution:
 
         for num in nums:
             index = abs(num) - 1
-            if nums[index] < 0:
-                res.append(abs(num))
+            if nums[index] < 0: res.append(abs(num))
             nums[index] = -nums[index]
         
         return res
