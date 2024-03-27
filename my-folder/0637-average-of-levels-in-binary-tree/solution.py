@@ -6,23 +6,23 @@
 #         self.right = right
 class Solution:
     def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
-        res = []
-        queue = []
-        if not root:
-            return res
-        queue.append(root)
-        while queue:
-            n = len(queue)
-            total = 0
-            for i in range(n):
-                node = queue.pop(0)
-                print(node.val)
-                total += node.val
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            add = total/n
-            res.append(add)
-        return res
+        if not root: return []
 
+        def bfs(root, arr):
+            queue = [root]
+
+            while queue:
+                size = len(queue)
+                total = 0
+                for i in range(size):
+                    node = queue.pop(0)
+                    total += node.val
+                    if node.left: queue.append(node.left)
+                    if node.right: queue.append(node.right)
+            
+                value = total / size
+                arr.append(value)
+        
+        res = []
+        bfs(root, res)
+        return res
