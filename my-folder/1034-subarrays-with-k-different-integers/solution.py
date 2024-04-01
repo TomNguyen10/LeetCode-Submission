@@ -4,7 +4,7 @@ class Solution:
             left = 0
             res = 0
             count = defaultdict(int)
-            for right in range(len(arr)):
+            for right in range(len(nums)):
                 if count[arr[right]] == 0: num -= 1
                 count[arr[right]] += 1
                 while num < 0:
