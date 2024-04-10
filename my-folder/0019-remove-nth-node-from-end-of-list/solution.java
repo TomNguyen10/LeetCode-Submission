@@ -10,24 +10,27 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (head == null || head.next == null) return null;
-
-        ListNode temp = new ListNode();
-        temp.next = head;
-        ListNode first = temp, second = temp;
-
+        if (head == null || head.next == null) {
+            return null;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        
         while (n > 0) {
-            second = second.next;
+            fast = fast.next;
             n--;
         }
 
-        while (second.next != null) {
-            second = second.next;
-            first = first.next;
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
         }
 
-        first.next = first.next.next;
+        slow.next = slow.next.next;
 
-        return temp.next;
+        return dummy.next;
     }
 }
