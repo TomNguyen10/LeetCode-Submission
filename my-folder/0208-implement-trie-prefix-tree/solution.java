@@ -1,27 +1,53 @@
+class TrieNode {
+
+    public HashMap<Character, TrieNode> children;
+    public boolean endOfWord;
+
+    public TrieNode() {
+        children = new HashMap<>();
+        endOfWord = false;
+    }
+}
+
 class Trie {
 
-    private List<String> list;
+    private TrieNode root;
 
     public Trie() {
-        list = new ArrayList<>();
+        root = new TrieNode();
     }
     
     public void insert(String word) {
-        list.add(word);
+        TrieNode curr = this.root;
+        for (char c : word.toCharArray()) {
+            if (!curr.children.containsKey(c)) {
+                curr.children.put(c, new TrieNode());
+            }
+            curr = curr.children.get(c);
+        }
+        curr.endOfWord = true;
     }
     
     public boolean search(String word) {
-        for (String s : list) {
-            if (s.equals(word)) return true;
+        TrieNode curr = this.root;
+        for (char c : word.toCharArray()) {
+            if (!curr.children.containsKey(c)) {
+                return false;
+            }
+            curr = curr.children.get(c);
         }
-        return false;
+        return curr.endOfWord;
     }
     
     public boolean startsWith(String prefix) {
-        for (String s : list) {
-            if (s.startsWith(prefix)) return true;
+        TrieNode curr = this.root;
+        for (char c : prefix.toCharArray()) {
+            if (!curr.children.containsKey(c)) {
+                return false;
+            }
+            curr = curr.children.get(c);
         }
-        return false;
+        return true;
     }
 }
 
