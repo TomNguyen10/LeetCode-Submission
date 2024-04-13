@@ -1,51 +1,52 @@
 class TrieNode {
-
-    public HashMap<Character, TrieNode> children;
-    public boolean endOfWord;
+    
+    public Map<Character, TrieNode> children;
+    public boolean checked;
 
     public TrieNode() {
         children = new HashMap<>();
-        endOfWord = false;
+        checked = false;
     }
+
 }
 
 class Trie {
 
-    private TrieNode root;
+    private TrieNode parent;
 
     public Trie() {
-        root = new TrieNode();
+        parent = new TrieNode();
     }
     
     public void insert(String word) {
-        TrieNode curr = this.root;
-        for (char c : word.toCharArray()) {
-            if (!curr.children.containsKey(c)) {
-                curr.children.put(c, new TrieNode());
+        TrieNode curr = this.parent;
+        for (char letter : word.toCharArray()) {
+            if (!curr.children.containsKey(letter)) {
+                curr.children.put(letter, new TrieNode());
             }
-            curr = curr.children.get(c);
+            curr = curr.children.get(letter);
         }
-        curr.endOfWord = true;
-    }
+        curr.checked = true;
+     }
     
     public boolean search(String word) {
-        TrieNode curr = this.root;
-        for (char c : word.toCharArray()) {
-            if (!curr.children.containsKey(c)) {
+        TrieNode curr = this.parent;
+        for (char letter : word.toCharArray()) {
+            if (!curr.children.containsKey(letter)) {
                 return false;
             }
-            curr = curr.children.get(c);
+            curr = curr.children.get(letter);
         }
-        return curr.endOfWord;
+        return curr.checked;
     }
     
     public boolean startsWith(String prefix) {
-        TrieNode curr = this.root;
-        for (char c : prefix.toCharArray()) {
-            if (!curr.children.containsKey(c)) {
+        TrieNode curr = this.parent;
+        for (char letter : prefix.toCharArray()) {
+            if(!curr.children.containsKey(letter)) {
                 return false;
             }
-            curr = curr.children.get(c);
+            curr = curr.children.get(letter);
         }
         return true;
     }
