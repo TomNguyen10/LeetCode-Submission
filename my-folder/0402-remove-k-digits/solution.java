@@ -1,12 +1,12 @@
 class Solution {
     public String removeKdigits(String num, int k) {
         Stack<Character> stack = new Stack<>();
-        for (char letter : num.toCharArray()) {
-            while (!stack.isEmpty() && stack.peek() > letter && k > 0) {
+        for (char number : num.toCharArray()) {
+            while (!stack.isEmpty() && stack.peek() > number && k > 0) {
                 stack.pop();
                 k--;
             }
-            stack.push(letter);
+            stack.push(number);
         }
         while (k > 0) {
             stack.pop();
