@@ -15,13 +15,19 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return dfs(root, null, null);  
+        return valid(root, null, null);
     }
 
-    private boolean dfs (TreeNode root, Integer min, Integer max) {
-        if (root == null) return true;
-        if (min != null && root.val <= min) return false;
-        if (max != null && root.val >= max) return false;
-        return dfs(root.left, min, root.val) && dfs(root.right, root.val, max);
+    private boolean valid(TreeNode root, Integer min, Integer max) {
+        if (root == null) {
+            return true;
+        }
+        if (min != null && root.val <= min) {
+            return false;
+        }
+        if (max != null && root.val >= max) {
+            return false;
+        }
+        return valid(root.left, min, root.val) && valid(root.right, root.val, max);
     }
 }
