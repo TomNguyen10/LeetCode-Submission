@@ -1,32 +1,28 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i : nums) {
-            if (!map.containsKey(i)) map.put(i, 1);
-            else {
-                int val = map.get(i);
-                map.put(i, val+1);
-            }
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int num : nums) {
+            int current = count.getOrDefault(num, 0);
+            count.put(num, current+1);
         }
-
-        ArrayList<Integer>[] bucket = new ArrayList[nums.length+1];
-        for (int key : map.keySet()) {
-            int value = map.get(key);
+        List<Integer>[] bucket = new ArrayList[nums.length+1];
+        for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
             if (bucket[value] == null) bucket[value] = new ArrayList<Integer>();
             bucket[value].add(key);
         }
-
         int[] res = new int[k];
-        int count = 0;
-        for (int i = nums.length; i >= 0; i--) {
+        for (int i = nums.length; i > -1; i--) {
             if (bucket[i] != null) {
-                for (int r : bucket[i]) {
-                    res[count++] = r;
-                    if (count == k) return res;
+                for (int z : bucket[i]) {
+                    res[--k] = z;
+                    if (k == 0) {
+                        return res;
+                    }
                 }
             }
         }
-
         return res;
     }
 }
