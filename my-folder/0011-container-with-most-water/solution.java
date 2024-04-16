@@ -1,17 +1,20 @@
 class Solution {
     public int maxArea(int[] height) {
+        int res = 0;
         int left = 0;
         int right = height.length - 1;
-        int max = 0;
         while (left < right) {
-            max = Math.max(max, Math.min(height[left], height[right]) * (right - left));
-            if (height[left] <= height[right]) {
-                left++;
-            }
-            else {
+            int w = right - left;
+            int h = Math.min(height[right], height[left]);
+            int water = w*h;
+            res = Math.max(res, water);
+            if (height[left] >= height[right]) {
                 right--;
             }
-        }
-        return max;
+            else {
+                left++;
+            }
+        } 
+        return res;
     }
 }
