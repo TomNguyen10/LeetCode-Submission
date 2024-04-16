@@ -5,10 +5,10 @@ class Solution {
         }
         int[] alphabet = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            alphabet[s.charAt(i) - 'a']++;
-        }
-        for (int i = 0; i < t.length(); i++) {
-            alphabet[t.charAt(i) - 'a']--;
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
+            alphabet[c1 - 'a']++;
+            alphabet[c2 - 'a']--;
         }
         for (int i : alphabet) {
             if (i != 0) {
