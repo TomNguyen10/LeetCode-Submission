@@ -1,24 +1,29 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int left = 1;
-        int right = 1;
+        // Using binary search to check the minimum rate of eating
+        // The min will be 1 and the max is the maximum pile in the piles array
+        // Calculate the middle value and run a simulation for that to check if it is satisfy or not
+        // Return the minimum value
+        int max = 0;
+        int min = 1;
         for (int pile : piles) {
-            right = Math.max(right, pile);
+            max = Math.max(max, pile);
         }
-        while (left < right) {
-            int middle = left + (right-left)/2;
+        int res = max;
+        while (min < max) {
+            int mid = min + (max - min)/2;
             int hours = 0;
             for (int pile : piles) {
-                hours += Math.ceil((double) pile/middle);
+                hours += Math.ceil((double) pile / mid);
             }
             if (hours <= h) {
-                right = middle;
-            } 
+                res = mid;
+                max = mid;
+            }
             else {
-                left = middle + 1;
+                min = mid+1;
             }
         }
-        return right;
+        return res;
     }
 }
-
