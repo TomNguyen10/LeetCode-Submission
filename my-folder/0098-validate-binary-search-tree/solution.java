@@ -15,10 +15,13 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return valid(root, null, null);
+        if (root == null) {
+            return true;
+        }
+        return dfs(root, null, null);
     }
 
-    private boolean valid(TreeNode root, Integer min, Integer max) {
+    boolean dfs(TreeNode root, Integer max, Integer min) {
         if (root == null) {
             return true;
         }
@@ -28,6 +31,6 @@ class Solution {
         if (max != null && root.val >= max) {
             return false;
         }
-        return valid(root.left, min, root.val) && valid(root.right, root.val, max);
+        return dfs(root.left, root.val, min) && dfs(root.right, max, root.val);
     }
 }
