@@ -1,52 +1,55 @@
 class TrieNode {
-    
-    public Map<Character, TrieNode> children;
-    public boolean checked;
+
+    Map<Character, TrieNode> children;
+    boolean isChecked;
 
     public TrieNode() {
         children = new HashMap<>();
-        checked = false;
+        isChecked = false;
     }
 
 }
 
 class Trie {
 
-    private TrieNode parent;
+    TrieNode parent;
 
     public Trie() {
         parent = new TrieNode();
     }
     
     public void insert(String word) {
-        TrieNode curr = this.parent;
-        for (char letter : word.toCharArray()) {
-            if (!curr.children.containsKey(letter)) {
-                curr.children.put(letter, new TrieNode());
+        char[] arr = word.toCharArray();
+        TrieNode current = this.parent;
+        for (char c : arr) {
+            if (!current.children.containsKey(c)) {
+                current.children.put(c, new TrieNode());
             }
-            curr = curr.children.get(letter);
+            current = current.children.get(c);
         }
-        curr.checked = true;
-     }
+        current.isChecked = true;
+    }
     
     public boolean search(String word) {
-        TrieNode curr = this.parent;
-        for (char letter : word.toCharArray()) {
-            if (!curr.children.containsKey(letter)) {
+        TrieNode current = this.parent;
+        char[] arr = word.toCharArray();
+        for (char c : arr) {
+            if (!current.children.containsKey(c)) {
                 return false;
             }
-            curr = curr.children.get(letter);
+            current = current.children.get(c);
         }
-        return curr.checked;
+        return current.isChecked;
     }
     
     public boolean startsWith(String prefix) {
-        TrieNode curr = this.parent;
-        for (char letter : prefix.toCharArray()) {
-            if(!curr.children.containsKey(letter)) {
+       TrieNode current = this.parent;
+        char[] arr = prefix.toCharArray();
+        for (char c : arr) {
+            if (!current.children.containsKey(c)) {
                 return false;
             }
-            curr = curr.children.get(letter);
+            current = current.children.get(c);
         }
         return true;
     }
