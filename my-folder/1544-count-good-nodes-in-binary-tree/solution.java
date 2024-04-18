@@ -18,11 +18,11 @@ class Solution {
         return dfs(root, root.val);
     }
 
-    private int dfs(TreeNode root, int max) {
-        if (root == null) {
-            return 0;
-        }
+    int dfs(TreeNode root, int max) {
         int res = 0;
+        if (root == null) {
+            return res;
+        }
         if (root.val >= max) {
             res = 1;
             max = root.val;
