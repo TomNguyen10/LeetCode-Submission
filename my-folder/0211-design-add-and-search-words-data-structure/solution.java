@@ -1,29 +1,29 @@
 class WordDictionary {
 
-    public WordDictionary[] children;
-    public boolean end;
+    WordDictionary[] children;
+    boolean isChecked;
 
     public WordDictionary() {
         children = new WordDictionary[26];
-        end = false;
+        isChecked = false;
     }
     
     public void addWord(String word) {
         WordDictionary current = this;
-        for (char letter : word.toCharArray()) {
-            if (current.children[letter - 'a'] ==  null) {
-                current.children[letter - 'a'] = new WordDictionary();
-            }
-            current = current.children[letter - 'a'];
+        for (char c : word.toCharArray()) {
+            if (current.children[c - 'a'] == null) {
+                current.children[c - 'a'] = new WordDictionary();
+            } 
+            current = current.children[c - 'a'];
         }
-        current.end = true;
+        current.isChecked = true;
     }
     
     public boolean search(String word) {
         WordDictionary current = this;
         for (int i = 0; i < word.length(); i++) {
-            char letter = word.charAt(i);
-            if (letter == '.') {
+            char c = word.charAt(i);
+            if (c == '.') {
                 for (WordDictionary child : current.children) {
                     if (child != null && child.search(word.substring(i+1, word.length()))) {
                         return true;
@@ -32,13 +32,13 @@ class WordDictionary {
                 return false;
             }
             else {
-                if (current.children[letter - 'a'] == null) {
+                if (current.children[c - 'a'] == null) {
                     return false;
                 }
             }
-            current = current.children[letter - 'a'];
+            current = current.children[c - 'a'];
         }
-        return current != null && current.end;
+        return current != null && current.isChecked;
     }
 }
 
