@@ -1,36 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> merged = new ArrayList<>();
-        
-        int i = 0;
-        int n = intervals.length;
-        
-        // Add intervals before newInterval that end before newInterval starts
-        while (i < n && intervals[i][1] < newInterval[0]) {
-            merged.add(intervals[i]);
-            i++;
+        List<int[]> list = new ArrayList<>();
+        boolean inserted = false;
+        for (int[] interval : intervals) {
+            if (interval[1] < newInterval[0]) {
+                list.add(interval);
+            }
+            else if (interval[0] > newInterval[1]) {
+                if (inserted == false) {
+                    list.add(newInterval);
+                    inserted = true;
+                }
+                list.add(interval);
+            }
+            else {
+                newInterval[0] = Math.min(newInterval[0], interval[0]);
+                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            }
         }
-        
-        // Merge intervals that overlap with newInterval
-        while (i < n && intervals[i][0] <= newInterval[1]) {
-            newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
-            newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
-            i++;
+
+        if (inserted == false) {
+            list.add(newInterval);
         }
-        
-        // Add the merged newInterval
-        merged.add(newInterval);
-        
-        // Add the remaining intervals
-        while (i < n) {
-            merged.add(intervals[i]);
-            i++;
+        int[][]res = new int[list.size()][2];
+        for (int i = 0; i < list.size(); i++) {
+            int[] arr = list.get(i);
+            res[i] = new int[]{arr[0], arr[1]};
         }
-        
-        return merged.toArray(new int[merged.size()][]);
+        return res;
     }
 }
-
