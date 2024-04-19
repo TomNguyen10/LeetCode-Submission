@@ -1,6 +1,5 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
-
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
             public int compare(int[] p1, int[] p2) {
@@ -9,17 +8,13 @@ class Solution {
                 return Double.compare(distance1, distance2);
             }
         });
-        
         for (int[] point : points) {
             pq.offer(point);
         }
-
-        int[][] result = new int[k][2];
-        
+        int[][] res = new int[k][2];
         for (int i = 0; i < k; i++) {
-            result[i] = pq.poll();
+            res[i] = pq.poll();
         }
-
-        return result;
+        return res;
     }
 }
