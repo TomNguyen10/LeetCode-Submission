@@ -2,16 +2,16 @@ class Solution {
     public boolean uniqueOccurrences(int[] arr) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i : arr) {
-            map.merge(i, 1, Integer::sum);
+            int count = map.getOrDefault(i, 0);
+            map.put(i, count+1);
         }
         Set<Integer> set = new HashSet<>();
-        for (int freq : map.values()) {
-            if (set.contains(freq)) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int value = entry.getValue();
+            if (set.contains(value)) {
                 return false;
             }
-            else {
-                set.add(freq);
-            }
+            set.add(value);
         }
         return true;
     }
