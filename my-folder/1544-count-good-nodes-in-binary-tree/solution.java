@@ -18,7 +18,7 @@ class Solution {
         return dfs(root, root.val);
     }
 
-    int dfs(TreeNode root, int max) {
+    private int dfs(TreeNode root, int max) {
         int res = 0;
         if (root == null) {
             return res;
@@ -29,7 +29,7 @@ class Solution {
         }
         res += dfs(root.left, max);
         res += dfs(root.right, max);
-        
+
         return res;
     }
 }
