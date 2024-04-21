@@ -1,35 +1,31 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        int[] H1 = new int[26];
-        int[] H2 = new int[26];
-        
-        for (char c : word1.toCharArray()) {
-            H1[c - 'a']++;
+        if (word1.length() != word2.length()) {
+            return false;
         }
-        for (char c : word2.toCharArray()) {
-            H2[c - 'a']++;
+        int[] freq1 = new int[26];
+        int[] freq2 = new int[26];
+        for (int i = 0; i < word1.length(); i++) {
+            freq1[word1.charAt(i) - 'a']++;
+            freq2[word2.charAt(i) - 'a']++;
         }
-        
-        for (int i = 0; i < 26; ++i) {
-            if ((H1[i] != 0 && H2[i] == 0) || (H1[i] == 0 && H2[i] != 0)) {
+        for (int i = 0; i< 26; i++) {
+            if ((freq1[i] == 0 && freq2[i] !=0) || (freq1[i] != 0 && freq2[i] ==0)) {
                 return false;
             }
         }
-        
-        Map<Integer, Integer> frequencyOfFrequencyHash = new HashMap<>();
-        for (int freq : H1) {
-            frequencyOfFrequencyHash.put(freq, frequencyOfFrequencyHash.getOrDefault(freq, 0) + 1);
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < 26; i++) {
+            int count1 = map.getOrDefault(freq1[i], 0);
+            map.put(freq1[i], count1+1);
+            int count2 = map.getOrDefault(freq2[i], 0);
+            map.put(freq2[i], count2-1);
         }
-        for (int freq : H2) {
-            frequencyOfFrequencyHash.put(freq, frequencyOfFrequencyHash.getOrDefault(freq, 0) - 1);
-        }
-        
-        for (int freqCount : frequencyOfFrequencyHash.values()) {
-            if (freqCount != 0) {
+        for (int i : map.values()) {
+            if (i != 0) {
                 return false;
             }
         }
-        
         return true;
     }
 }
