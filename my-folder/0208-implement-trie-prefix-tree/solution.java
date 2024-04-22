@@ -1,14 +1,15 @@
 class TrieNode {
 
     Map<Character, TrieNode> children;
-    boolean isChecked;
+    boolean check;
 
     public TrieNode() {
         children = new HashMap<>();
-        isChecked = false;
+        check = false;
     }
 
 }
+
 
 class Trie {
 
@@ -19,33 +20,30 @@ class Trie {
     }
     
     public void insert(String word) {
-        char[] arr = word.toCharArray();
         TrieNode current = this.parent;
-        for (char c : arr) {
+        for (char c : word.toCharArray()) {
             if (!current.children.containsKey(c)) {
                 current.children.put(c, new TrieNode());
             }
             current = current.children.get(c);
         }
-        current.isChecked = true;
+        current.check = true;
     }
     
     public boolean search(String word) {
         TrieNode current = this.parent;
-        char[] arr = word.toCharArray();
-        for (char c : arr) {
+        for (char c : word.toCharArray()) {
             if (!current.children.containsKey(c)) {
                 return false;
             }
             current = current.children.get(c);
         }
-        return current.isChecked;
+        return current.check;
     }
     
     public boolean startsWith(String prefix) {
-       TrieNode current = this.parent;
-        char[] arr = prefix.toCharArray();
-        for (char c : arr) {
+        TrieNode current = this.parent;
+        for (char c : prefix.toCharArray()) {
             if (!current.children.containsKey(c)) {
                 return false;
             }
