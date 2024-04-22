@@ -24,15 +24,15 @@ class Solution {
         while (!q.isEmpty()) {
             int size = q.size();
             for (int i = 0; i < size; i++) {
-                TreeNode node = q.poll();
+                TreeNode curr = q.poll();
                 if (i == 0) {
-                    res.add(node.val);
+                    res.add(curr.val);
                 }
-                if (node.right != null) {
-                    q.offer(node.right);
+                if (curr.right != null) {
+                    q.offer(curr.right);
                 }
-                if (node.left != null) {
-                    q.offer(node.left);
+                if (curr.left != null) {
+                    q.offer(curr.left);
                 }
             }
         }
