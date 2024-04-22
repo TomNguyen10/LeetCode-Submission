@@ -2,20 +2,21 @@ class Solution {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         Arrays.sort(products);
         List<List<String>> res = new ArrayList<>();
-        TreeMap<String, Integer> map = new TreeMap<>();
-        List<String> productsList = Arrays.asList(products);
-        for (int i = 0; i < products.length; i++) {
-            map.put(products[i], i);
-        }
-        String key = "";
+        StringBuilder sb = new StringBuilder();
         for (char c : searchWord.toCharArray()) {
-            key += c;
-            String ceiling = map.ceilingKey(key);
-            String floor = map.floorKey(key + "~");
-            if (ceiling == null || floor == null) break;
-            res.add(productsList.subList(map.get(ceiling), Math.min(map.get(ceiling) + 3, map.get(floor) + 1)));
+            sb.append(c);
+            String current = sb.toString();
+            List<String> temp = new ArrayList<>();
+            for (String s : products) {
+                if (s.startsWith(current)) {
+                    temp.add(s);
+                }
+                if (temp.size() == 3) {
+                    break;
+                }
+            }
+            res.add(temp);
         }
-        while (res.size() < searchWord.length()) res.add(new ArrayList<>());
         return res;
     }
 }
