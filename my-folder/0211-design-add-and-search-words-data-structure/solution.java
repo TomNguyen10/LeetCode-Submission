@@ -1,11 +1,11 @@
 class WordDictionary {
 
     WordDictionary[] children;
-    boolean isChecked;
+    boolean check;
 
     public WordDictionary() {
         children = new WordDictionary[26];
-        isChecked = false;
+        check = false;
     }
     
     public void addWord(String word) {
@@ -13,10 +13,10 @@ class WordDictionary {
         for (char c : word.toCharArray()) {
             if (current.children[c - 'a'] == null) {
                 current.children[c - 'a'] = new WordDictionary();
-            } 
+            }
             current = current.children[c - 'a'];
         }
-        current.isChecked = true;
+        current.check = true;
     }
     
     public boolean search(String word) {
@@ -38,7 +38,7 @@ class WordDictionary {
             }
             current = current.children[c - 'a'];
         }
-        return current != null && current.isChecked;
+        return current != null && current.check;
     }
 }
 
