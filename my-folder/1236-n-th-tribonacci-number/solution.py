@@ -8,7 +8,7 @@ class Solution:
         while n > 2:
             d = a + b + c
             a = b
-            b = c 
+            b = c
             c = d
             n -= 1
         return c
