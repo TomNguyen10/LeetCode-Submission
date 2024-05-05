@@ -8,17 +8,11 @@ class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
         if not root:
             return ""
-
         res = str(root.val)
         left = self.tree2str(root.left)
         right = self.tree2str(root.right)
-
         if left or right:
-            res += "(" + left + ")"
-        
+            res += '(' + left + ')'
         if right:
-            res += "(" + right + ")"
-
+            res += '(' + right + ')'
         return res
-
-
