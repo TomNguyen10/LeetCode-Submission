@@ -10,20 +10,18 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        if not root: return
-
-        q = [root]
-
+        if not root:
+            return
+        q = deque([root])
         while q:
-            right_node = None
-
-            for _ in range(len(q)):
-                cur = q.pop(0)
-                cur.next = right_node
-                right_node = cur
-                if cur.right:
-                    q.append(cur.right)
-                if cur.left:
-                    q.append(cur.left)
-        
+            size = len(q)
+            prev = None
+            for i in range(size):
+                node = q.popleft()
+                if node.right:
+                    q.append(node.right)
+                if node.left:
+                    q.append(node.left)
+                node.next = prev
+                prev = node
         return root
