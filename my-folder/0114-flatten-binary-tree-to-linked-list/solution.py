@@ -4,21 +4,23 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
-        if not root:
-            return
-        
+        self.res = []
+
         def preOrder(node):
             if not node:
-                return []
-            return [node] + preOrder(node.left) + preOrder(node.right)
+                return
+            self.res.append(node)
+            preOrder(node.left)
+            preOrder(node.right)
         
-        res = preOrder(root)
+        preOrder(root)
 
-        for i in range(len(res) - 1):
-            res[i].left = None
-            res[i].right = res[i+1]
+        for i in range(len(self.res) - 1):
+            self.res[i].left = None
+            self.res[i].right = self.res[i+1]
