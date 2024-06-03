@@ -6,13 +6,14 @@
 #         self.right = right
 class Solution:
     def printTree(self, root: Optional[TreeNode]) -> List[List[str]]:
-        def getHeight(node):
-            if not node:
+        def getHeight(root):
+            if not root:
                 return 0
-            return 1 + max(getHeight(node.left), getHeight(node.right))
+            return 1 + max(getHeight(root.left), getHeight(root.right))
         
         height = getHeight(root)
         width = 2**height - 1
+
         self.res = [["" for _ in range(width)] for _ in range(height)]
 
         def update(node, row, left, right):
@@ -24,4 +25,5 @@ class Solution:
             update(node.right, row + 1, mid + 1, right)
         
         update(root, 0, 0, width - 1)
+
         return self.res
