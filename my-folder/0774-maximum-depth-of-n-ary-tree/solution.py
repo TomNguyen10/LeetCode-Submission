@@ -14,4 +14,4 @@ class Solution:
         for child in root.children:
             res = max(res, 1 + self.maxDepth(child))
         return res
-        
+
