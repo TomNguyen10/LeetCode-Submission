@@ -1,7 +1,7 @@
 class Solution:
     def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
-        hash_set = set(bank)
-        if not hash_set or endGene not in hash_set:
+        bank = set(bank)
+        if not bank or endGene not in bank:
             return -1
         
         char = ['A', 'C', 'G', 'T']
@@ -13,18 +13,20 @@ class Solution:
         while q:
             size = len(q)
             for _ in range(size):
-                curr = q.popleft()
-                if curr == endGene:
+                currGene = q.popleft()
+                if currGene == endGene:
                     return res
-                for i in range(len(curr)):
-                    original = curr[i]
+                for i in range(len(currGene)):
+                    original = currGene[i]
                     for c in char:
-                        if c != original:  
-                            next_gene = curr[:i] + c + curr[i+1:]
-                            if next_gene in hash_set and next_gene not in visited:
-                                q.append(next_gene)
-                                visited.add(next_gene)
+                        if c != original:
+                            nextGene = currGene[:i] + c + currGene[i+1:]
+                            if nextGene in bank and nextGene not in visited:
+                                q.append(nextGene)
+                                visited.add(nextGene)
+            
             res += 1
         
         return -1
+
 
