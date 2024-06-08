@@ -10,7 +10,7 @@ from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
-            return
+            return 
         self.dic = {}
         def dfs(node, visited):
             if node in visited:
@@ -27,5 +27,3 @@ class Solution:
                 neigh.append(self.dic[neighbor])
             val.neighbors = neigh
         return self.dic[node]
-        
-
