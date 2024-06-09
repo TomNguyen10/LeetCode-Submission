@@ -9,7 +9,6 @@ class Solution:
             start = card
             while count[start-1]:
                 start -= 1
-            
             while start <= card:
                 while count[start]:
                     for i in range(start, start + groupSize):
@@ -17,5 +16,6 @@ class Solution:
                             return False
                         count[i] -= 1
                 start += 1
-            
+                    
+
         return True
