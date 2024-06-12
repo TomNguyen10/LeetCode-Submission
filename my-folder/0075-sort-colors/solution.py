@@ -3,17 +3,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        left = 0
-
-        for i in range(len(nums)):
-            if nums[i] == 0:
-                nums[i], nums[left] = nums[left], nums[i]
-                left += 1
-        
-        right = len(nums) - 1
-            
-        for j in range(len(nums) - 1, -1, -1):
-            if nums[j] == 2:
-                nums[j], nums[right] = nums[right], nums[j]
-                right -= 1
-        
+        p1, p2 = 0, len(nums) - 1
+        p = 0
+        while p <= p2:
+            if nums[p] < 1:
+                nums[p], nums[p1] = nums[p1], nums[p]
+                p1 += 1
+                p += 1
+            elif nums[p] > 1:
+                nums[p], nums[p2] = nums[p2], nums[p]
+                p2 -= 1
+            else:
+                p += 1
