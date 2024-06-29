@@ -5,11 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    val = 0
     def bstToGst(self, root: TreeNode) -> TreeNode:
-        if root.right:
-            self.bstToGst(root.right)
-        root.val = self.val = self.val + root.val
-        if root.left:
-            self.bstToGst(root.left)
+        self.list = []
+        def inOrder(node):
+            if not node:
+                return
+            inOrder(node.left)
+            self.list.append(node)
+            inOrder(node.right)
+        
+        inOrder(root)
+        val = 0
+        for i in range(len(self.list) - 1, -1, -1):
+            node = self.list[i]
+            curr = node.val
+            node.val += val
+            val += curr
+
         return root
