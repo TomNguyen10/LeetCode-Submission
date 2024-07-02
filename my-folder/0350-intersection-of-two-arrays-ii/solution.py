@@ -1,9 +1,11 @@
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        c1 = Counter(nums1)
-        c2 = Counter(nums2)
-        c = c1 & c2
-        res = []
-        for key, val in c.items():
-            res.extend([key] * val)
-        return res
+        longer = nums1 if len(nums1) > len(nums2) else nums2
+        shorter = nums2 if len(nums1) > len(nums2) else nums1
+
+        ans = []
+        for i in shorter:
+            if i in longer:
+                longer.remove(i)
+                ans.append(i)
+        return ans
