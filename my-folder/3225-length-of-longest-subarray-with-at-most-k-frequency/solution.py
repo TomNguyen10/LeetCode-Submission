@@ -4,11 +4,10 @@ class Solution:
         dic = defaultdict(int)
         left = 0
         right = 0
-        while right < len(nums):
+        for right in range(len(nums)):
             dic[nums[right]] += 1
             while dic[nums[right]] > k:
                 dic[nums[left]] -= 1
                 left += 1
             res = max(res, right - left + 1)
-            right += 1
         return res
