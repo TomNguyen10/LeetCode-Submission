@@ -1,14 +1,16 @@
 class Solution:
     def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
-        sumOfn = mean * (n + len(rolls)) - sum(rolls)
-        if 6 * n < sumOfn or sumOfn < n:
+        m = len(rolls)
+        sumOfN = mean * (m + n) - sum(rolls)
+
+        if 6*n < sumOfN or sumOfN < n:
             return []
 
-        avg_roll = sumOfn // n
-        remaining = sumOfn % n
-        missing_rolls = [avg_roll] * n
+        avg = sumOfN // n
+        remain = sumOfN % n
+        res = [avg] * n
 
-        for i in range(remaining):
-            missing_rolls[i] += 1
-
-        return missing_rolls
+        for i in range(remain):
+            res[i] += 1
+        
+        return res
