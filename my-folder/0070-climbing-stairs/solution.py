@@ -1,13 +1,12 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n <= 2:
-            return n
+            return n 
         
-        ones = 1
-        twos = 2
+        one, two = 1, 2
 
         while n > 2:
-            ones, twos = twos, ones + twos
+            one, two = two, one + two
             n -= 1
         
-        return twos
+        return two
