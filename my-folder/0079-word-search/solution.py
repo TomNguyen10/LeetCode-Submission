@@ -1,6 +1,5 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-
         def backtrack(matrix, current, target, row, col, visited):
             if current == target:
                 return True
@@ -10,17 +9,23 @@ class Solution:
             
             visited[row][col] = True
 
-            found = backtrack(matrix, current + matrix[row][col], target, row+1, col, visited) or backtrack(matrix, current + matrix[row][col], target, row-1, col, visited) or backtrack(matrix, current + matrix[row][col], target, row, col+1, visited) or backtrack(matrix, current + matrix[row][col], target, row, col-1, visited)
+            up = backtrack(matrix, current + matrix[row][col], target, row + 1, col, visited)
+            down = backtrack(matrix, current + matrix[row][col], target, row - 1, col, visited)
+            right = backtrack(matrix, current + matrix[row][col], target, row, col + 1, visited)
+            left = backtrack(matrix, current + matrix[row][col], target, row, col - 1, visited)
+
+            found = up or down or right or left
 
             visited[row][col] = False
 
             return found
         
         visited = [[False for _ in range(len(board[0]))] for _ in range(len(board))]
-
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if backtrack(board, "", word, i, j, visited):
+        
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                res = backtrack(board, "", word, r, c, visited)
+                if res:
                     return True
-
+        
         return False
